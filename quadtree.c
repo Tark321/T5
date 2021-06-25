@@ -318,6 +318,7 @@ void insere(StructTree* qt, StructNode* no)
     }
 
 }
+
 QtNo insereQt(QuadTree qt, Ponto p, QtInfo pInfo)
 {     
     if(p == NULL)

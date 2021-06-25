@@ -51,6 +51,7 @@ void desenhaVertice(Vertice vertice, Lista listaQry[])
     Texto t = criaTexto("0", getPontoX(v->ponto), getPontoY(v->ponto), "black", "black", v->id);
     insert(listaQry[4], t);
 }
+
 void desalocaVertice(Vertice vertice)
 {
     StructVertice* v = (StructVertice*) vertice;
