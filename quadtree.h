@@ -89,6 +89,9 @@ void percorreProfundidadeQt(QuadTree qt,funcVisita f,ExtraInfo ei);
  */
 
 void percorreLarguraQt(QuadTree qt,funcVisita f, ExtraInfo ei);
+
+void insere(StructTree* qt, StructNode* no);
+
 /**
     Semelhante a percorreProfundidadeQt. Percorre a �rvore em largura.
  */
