@@ -231,19 +231,11 @@ void percorreLarguraQt(QuadTree qt,funcVisita f, ExtraInfo ei)
 
 }
 
-QtNo insereQt(QuadTree qt, Ponto p, QtInfo pInfo)
-{     
-    if(p == NULL)
-    {
-        return NULL;
-    }
-
-    StructTree *tree = (StructTree*) qt;
-    StructNode *aux = tree->raiz;
+void insere(StructTree* qt, StructNode* no)
+{
+    StructNode *aux = qt->raiz;
     Ponto auxP;
-    StructNode *no = (StructNode*) malloc(sizeof(StructNode));
-    no->info = pInfo;
-    no->ponto = p;
+    Ponto p;
     no->NE = NULL;
     no->NW = NULL;
     no->SE = NULL;
@@ -252,14 +244,14 @@ QtNo insereQt(QuadTree qt, Ponto p, QtInfo pInfo)
 
     if(aux == NULL)
     {
-        tree->raiz = no;
-        return no;
+        qt->raiz = no;
+        return;
     }
     
     while(no->parent == NULL)
     {
         auxP = aux->ponto;
-
+        p = no->ponto;
         if(auxP != NULL)
         {
             if(getPontoX(p) >= getPontoX(auxP))
@@ -325,6 +317,19 @@ QtNo insereQt(QuadTree qt, Ponto p, QtInfo pInfo)
         }
     }
 
+}
+QtNo insereQt(QuadTree qt, Ponto p, QtInfo pInfo)
+{     
+    if(p == NULL)
+    {
+        return NULL;
+    }
+
+    StructNode *no = (StructNode*) malloc(sizeof(StructNode));
+    StructTree *tree = (StructTree*) qt;
+    no->ponto = p;
+    no->info = pInfo;
+    insere(tree, no);
     return no;
     
 }
@@ -459,7 +464,15 @@ QtInfo removeNoQt(QuadTree qt,QtNo pNo)
         {
             insereFila(fila, aux->SW);
         }
-        insereQt(tree, aux->ponto, aux);
+
+        if(aux != NULL)
+        {
+            insere(tree, aux);
+        }
+        else 
+        {
+            break;
+        }
     }
 
     info = getInfoQt(tree, no);
@@ -610,7 +623,6 @@ QtNo getNoIdQt(QuadTree qt, QtNo no, char chave[])
     
     return NULL;
 }
-
 
 QtInfo getInfoById(QuadTree qt, QtNo no, char* chave)
 {

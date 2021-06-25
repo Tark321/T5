@@ -46,7 +46,7 @@ void setVerticePonto(Vertice vertice, Ponto p)
 void desenhaVertice(Vertice vertice, Lista listaQry[])
 {
     StructVertice* v = (StructVertice*) vertice;
-    Circulo c = criaCirculo("0", 10, getPontoX(v->ponto), getPontoY(v->ponto), "2", "blue", "blue");
+    Circulo c = criaCirculo("0", 10, getPontoX(v->ponto), getPontoY(v->ponto), "2", "blue", "blue", 1);
     insert(listaQry[3], c); 
     Texto t = criaTexto("0", getPontoX(v->ponto), getPontoY(v->ponto), "black", "black", v->id);
     insert(listaQry[4], t);

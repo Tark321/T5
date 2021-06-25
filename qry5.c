@@ -73,11 +73,10 @@ void e(FILE* saida, HashTable hash[], Lista listaQry[], char r[], char cep[], Po
     Linha linha = criaLinha( x, y, x, 0, "black");
     insert(listaQry[2], linha);
 
-    Texto texto = criaTexto("0", x, 0, "white", "black", r);
-    insert(listaQry[4], texto);
+    
 }
 
-void gg(FILE* saida, Ponto registradores[], QuadTree treeObjeto[], Lista listaQry[], int r, char id[])
+void gg(FILE* saida, Ponto registradores[], QuadTree treeObjeto[], Lista listaQry[], char r[], char id[])
 {
     int achou = 0;
     int indice = getIndice(r);
@@ -123,5 +122,27 @@ void gg(FILE* saida, Ponto registradores[], QuadTree treeObjeto[], Lista listaQr
 
         Linha linha = criaLinha(x, y, x, 0, "black");
         insert(listaQry[2], linha);
+
+        Texto texto = criaTexto("0", x, 0, "white", "black", r);
+        insert(listaQry[4], texto);
     }
+}
+
+void xy(Ponto registradores[], Lista listaQry[], char r[], double x, double y)
+{
+    int indice = getIndice(r);
+
+    setPontoX(registradores[indice], x);
+    setPontoY(registradores[indice], y);
+
+    Linha linha = criaLinha(x, y, x, 0, "black");
+    insert(listaQry[2], linha);
+
+    Texto texto = criaTexto("0", x, 0, "white", "black", r);
+    insert(listaQry[4], texto);
+}
+
+void cvv(Grafo grafo)
+{
+    
 }
