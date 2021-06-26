@@ -847,7 +847,7 @@ void mud(QuadTree treeObjeto[], Lista listaQry[], FILE* saida, char cpf[], char 
 
     setAddressCep(endereco, cep);
     setAddressNum(endereco, num);
-    setAddressPonto(endereco, p);
+    setAddressPonto(endereco, getPontoX(p), getPontoY(p));
     setAddressFace(endereco, face);
     setAddressComplemento(endereco, complemento);
 }

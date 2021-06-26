@@ -533,7 +533,7 @@ void desalocaNo(StructNode *no)
     desalocaNo(no->SE);
     desalocaNo(no->SW);
 
-    if(no->ponto != no->info)
+    if(no->ponto != no->info && no->ponto != NULL)
     {
       free(no->ponto);
     }
