@@ -12,5 +12,8 @@
 #include "radiobase.h"
 #include "semaforo.h"
 #include "hidrante.h"
+#include "grafo.h"
+#include "svg.h"
+#include "vertice.h"
 
 #endif

@@ -126,8 +126,17 @@ void desenhaRadioBase(Radiobase radiobase, FILE* arqSvg)
 
 void desenhaPosto(Posto posto, FILE* arqSvg)
 {
-    fprintf(arqSvg, "\t<circle cx=\"%lf\" cy=\"%lf\" r=\"%d\" stroke=\"%s\" fill=\"%s\"/>\n ", 
-    getPontoX(posto), getPontoY(posto), 5, "green", "blue");
+    double x = getPostoX(posto);
+    double y = getPostoY(posto);
+    double r = 5;
+
+    fprintf(arqSvg, "\t<polygon points=\"%lf,%lf, %lf,%lf, %lf,%lf, %lf, %lf\" fill =\"red\"/>",
+    x-r-1, y, x, y+r+1, x+r+1, y, x, y-r-1);
+    fprintf(arqSvg, "\t<line x1=\"%lf\" y1=\"%lf\" x2=\"%lf\" y2=\"%lf\" style=\"stroke:rgb(255,255,255);stroke-width:1\" />",
+    x-r, y, x+r, y);
+    fprintf(arqSvg, "\t<line x1=\"%lf\" y1=\"%lf\" x2=\"%lf\" y2=\"%lf\" style=\"stroke:rgb(255,255,255);stroke-width:1\" />",
+    x, y-r, x, y+r);
+    
 }
 
 void desenhaLinha(Linha linha, FILE* arqSvg)

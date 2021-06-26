@@ -38,6 +38,7 @@ void lerGeo(char arqGeo[], char nomeSvgGeo[], QuadTree treeObjeto[], Lista lista
         exit(1);
     }
 
+    printf("%s", nomeSvgGeo);
     FILE *arqSvg;
     arqSvg = fopen(nomeSvgGeo, "w");
 
@@ -166,6 +167,7 @@ void lerGeo(char arqGeo[], char nomeSvgGeo[], QuadTree treeObjeto[], Lista lista
         {
             fscanf(geo,"%lf %lf\n",&x, &y);
             Posto posto = criaPosto(x, y, distancia);
+            desenhaPosto(posto, arqSvg);
             insert(listaObjeto[7], posto);
         
             n++;
@@ -187,7 +189,7 @@ void lerGeo(char arqGeo[], char nomeSvgGeo[], QuadTree treeObjeto[], Lista lista
     balancearQt(treeObjeto[4], listaObjeto[4], getHidrantePonto, swapHidrante);
     balancearQt(treeObjeto[5], listaObjeto[5], getSemaforoPonto, swapSemaforo);
     balancearQt(treeObjeto[6], listaObjeto[6], getRadiobasePonto, swapRB);
-    //balancearQt(treeObjeto[7], listaObjeto[7], NULL, swapPonto);
+    balancearQt(treeObjeto[7], listaObjeto[7], getPostoPonto, swapPonto);
 
     for(No no = getFirst(listaObjeto[14]); no != NULL; no = getNext(no))
     {

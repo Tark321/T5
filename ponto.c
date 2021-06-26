@@ -39,7 +39,7 @@ void setPontoX(Ponto ponto, double x)
 
 void setPontoY(Ponto ponto, double y)
 {
-    pointStruct *p = (pointStruct*) ponto;\
+    pointStruct *p = (pointStruct*) ponto;
     p->y = y;
 }
 

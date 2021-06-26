@@ -24,6 +24,10 @@ Ponto getComercioPonto(Comercio comercio);
 
 double getComercioNum(Comercio comercio);
 
+int getComercioSize();
+
+void setComercioPonto(Comercio comercio, double x, double y);
+
 void swapComercio(Comercio c1, Comercio c2);
 
 void desalocaComercio(Comercio comercio);

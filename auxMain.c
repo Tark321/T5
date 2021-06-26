@@ -8,7 +8,9 @@
 #include "lerEc.h"
 #include "lerVia.h"
 #include "lerQry.h"
+#include "lerHash.h"
 #include "quadtree.h"
+#include "hashFile.h"
 #include "hashTable.h"
 
 char *concatenacao(char dir_entrada[])
@@ -27,7 +29,7 @@ char *concatenacao(char dir_entrada[])
 
 
 void auxMain(char arq_geoNome[], char dir_saida[], char dir_entrada[], char arq_consulta[], char arq_pmNome[],
-char arq_ecNome[], char arq_viaNome[])
+char arq_ecNome[], char arq_viaNome[], char arq_nomeBaseRead[], char arq_nomeBaseWrite[])
 {
     
     char *arqEc = NULL;
@@ -39,6 +41,7 @@ char arq_ecNome[], char arq_viaNome[])
     char *nomeGeo = NULL;
     char *nomeQry = NULL;
     char *saidaQry = NULL;   
+    char *nomeBase = NULL;
     char *nomeSvgGeo = NULL;
     
     QuadTree treeObjeto[12];
@@ -179,14 +182,22 @@ char arq_ecNome[], char arq_viaNome[])
 
     lerGeo(arqGeo, nomeSvgGeo, treeObjeto, listaObjeto, listaHash);
 
-    if(arq_pmNome != NULL)
+    if(arq_nomeBaseRead != NULL)
     {
-        lerPm(arqPm, treeObjeto, listaObjeto, listaHash);
+        readHashfile(listaHash, treeObjeto[9], treeObjeto[10], arq_nomeBaseRead);
     }
-    if(arq_ecNome != NULL)
+    else
     {
-        lerEc(arqEc, treeObjeto, listaObjeto, listaHash);
+        if(arq_pmNome != NULL)
+        {
+            lerPm(arqPm, treeObjeto, listaObjeto, listaHash);
+        }
+        if(arq_ecNome != NULL)
+        {
+            lerEc(arqEc, treeObjeto, listaObjeto, listaHash);
+        }
     }
+    
     if(arq_viaNome != NULL)
     {
         lerVia(arqVia, grafo);
@@ -201,11 +212,11 @@ char arq_ecNome[], char arq_viaNome[])
     }
 
 
-    for(int i = 0; i < 12; i++)
-    {
-        desalocaQt(treeObjeto[i]);
+    // for(int i = 0; i < 12; i++)
+    // {
+    //     desalocaQt(treeObjeto[i]);
 
-    }  
+    // }  
 
     // for(int i = 0; i < 15; i++)
     // {
@@ -215,10 +226,10 @@ char arq_ecNome[], char arq_viaNome[])
     //     }
     // }
 
-    for(int i = 0; i < 11; i++)
-    {
-        removeList(listasQry[i], NULL);
-    }
+    // for(int i = 0; i < 11; i++)
+    // {
+    //     removeList(listasQry[i], NULL);
+    // }
 
     
     // for(int i = 0; i < 4; i++)

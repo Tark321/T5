@@ -99,6 +99,17 @@ double getComercioNum(Comercio comercio)
     return c->num;
 }
 
+int getComercioSize()
+{
+    return sizeof(StructComercio);
+}
+
+void setComercioPonto(Comercio comercio, double x, double y)
+{
+    StructComercio* c = (StructComercio*) comercio;
+    c->ponto = criaPonto(x, y);
+}
+
 void swapComercio(Comercio c1, Comercio c2)
 {
     StructComercio* a = (StructComercio*) c1;

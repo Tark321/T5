@@ -21,6 +21,8 @@ int main (int argc, char *argv[])
     char *arq_ecNome = NULL;    
     char *arq_pmNome = NULL;
     char *arq_viaNome = NULL;
+    char *arq_nomeBaseRead = NULL;
+    char *arq_nomeBaseWrite = NULL;
 
     int i;
     for(i=1;i<argc;i++)
@@ -106,8 +108,31 @@ int main (int argc, char *argv[])
             arq_viaNome = (char*) malloc((strlen(argv[i]) + 1)*sizeof (char));
             strcpy(arq_viaNome, argv[i]);
         }
+        else if(strcmp("-k", argv[i]) == 0)
+        {
+            i++;
+            if(argv[i] == NULL)
+            {
+                printf("\nERRO\nParametro nao encontrado em k\n");
+                exit(1);
+            }
+            arq_nomeBaseWrite = (char*) malloc((strlen(argv[i]) + 1)*sizeof (char));
+            strcpy(arq_nomeBaseWrite, argv[i]);
+        }
+        else if(strcmp("-u", argv[i]) == 0)
+        {
+            i++;
+            if(argv[i] == NULL)
+            {
+                printf("\nERRO\nParametro nao encontrado em u\n");
+                exit(1);
+            }
+            arq_nomeBaseRead = (char*) malloc((strlen(argv[i]) + 1)*sizeof (char));
+            strcpy(arq_nomeBaseRead, argv[i]);
+        }
+        
     }
 
-    auxMain(arq_geoNome, dir_saida, dir_entrada, arq_consulta, arq_pmNome, arq_ecNome, arq_viaNome);  
+    auxMain(arq_geoNome, dir_saida, dir_entrada, arq_consulta, arq_pmNome, arq_ecNome, arq_viaNome, arq_nomeBaseRead, arq_nomeBaseWrite);  
     
 }

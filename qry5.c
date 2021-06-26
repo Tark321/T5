@@ -73,11 +73,10 @@ void e(FILE* saida, HashTable hash[], Lista listaQry[], char r[], char cep[], Po
     Linha linha = criaLinha( x, y, x, 0, "black");
     insert(listaQry[2], linha);
 
-    Texto texto = criaTexto("0", x, 0, "white", "black", r);
-    insert(listaQry[4], texto);
+    
 }
 
-void gg(FILE* saida, Ponto registradores[], QuadTree treeObjeto[], Lista listaQry[], int r, char id[])
+void gg(FILE* saida, Ponto registradores[], QuadTree treeObjeto[], Lista listaQry[], char r[], char id[])
 {
     int achou = 0;
     int indice = getIndice(r);
@@ -123,5 +122,97 @@ void gg(FILE* saida, Ponto registradores[], QuadTree treeObjeto[], Lista listaQr
 
         Linha linha = criaLinha(x, y, x, 0, "black");
         insert(listaQry[2], linha);
+
+        Texto texto = criaTexto("0", x, 0, "white", "black", r);
+        insert(listaQry[4], texto);
     }
 }
+
+void xy(Ponto registradores[], Lista listaQry[], char r[], double x, double y)
+{
+    int indice = getIndice(r);
+
+    setPontoX(registradores[indice], x);
+    setPontoY(registradores[indice], y);
+
+    Linha linha = criaLinha(x, y, x, 0, "black");
+    insert(listaQry[2], linha);
+
+    Texto texto = criaTexto("0", x, 0, "white", "black", r);
+    insert(listaQry[4], texto);
+}
+
+void cvv(Grafo grafo, char nomeSvg[], char sfx[], Lista listaQry[])
+{
+    Grafo via = criaGrafoNDirecionado(grafo);
+    Grafo ciclo = prim(via);
+
+    if(ciclo == NULL)
+    {
+        exit(1);
+    }
+
+    char* arqsvg = malloc(sizeof(char*) * (strlen(nomeSvg) + strlen(sfx) + 6));
+    sprintf(arqsvg, "%s-%s.svg", nomeSvg, sfx);
+    FILE* svg = fopen(arqsvg, "w");
+    iniciaSvg(svg);
+    desenhaGrafo(grafo, listaQry);
+    desenhaGrafo(ciclo, listaQry);
+    finalizaSvg(svg);
+
+    fclose(svg);
+    free(arqsvg);
+
+}
+
+// void p(Grafo grafo, Ponto registradores[], char sfx[], char cmc[], char cmr[], FILE* saida, char nomeSvg[], char r1[], char r2[])
+// {
+//     int indice1 = getIndice(r1);
+//     int indice2 = getIndice(r2);
+
+//     Vertice vi = getGrafoVertice(getInfo(getFirst(grafo)));
+//     Vertice vf = getGrafoVertice(getInfo(getFirst(grafo)));
+
+//     char idi[100];
+//     char idf[100];
+//     strcpy(idi, getVerticeId(vi));
+//     strcpy(idf, getVerticeId(vf));
+
+//     Ponto inicial = registradores[indice1];
+//     Ponto final = registradores[indice2];
+
+//     double xi = getPontoX(inicial);
+//     double yi = getPontoY(inicial);
+//     double xf = getPontoX(final);
+//     double yf = getPontoY(final);
+
+//     double mc;
+//     double mr;
+
+//     double menor1 = distancia(xi, yi, getPontoX(getVerticePonto(vi)), getPontoY(getVerticePonto(vi)));
+//     double menor2 = distancia(xf, yf, getPontoX(getVerticePonto(vf)), getPontoY(getVerticePonto(vf)));
+
+//     for(No node = getNext(getFirst(grafo)); node != NULL; node = getNext(node))
+//     {
+//         ListAdjc l = getInfo(node);
+
+//         if(menor1 > distancia(getPontoX(getGrafoVertice(getInfo(node))), getPontoY(getGrafoVertice(getInfo(node))), xi, yi))
+//         {
+//             strcpy(idi, getVerticeId(getGrafoVertice(getInfo(node))));
+//             menor1 = distancia(getPontoX(getGrafoVertice(getInfo(node))), getPontoY(getGrafoVertice(getInfo(node))), xi, yi);
+//         }
+//         if(menor2 > distancia(getPontoX(getGrafoVertice(getInfo(node))), getPontoY(getGrafoVertice(getInfo(node))),xf, yf))
+//         {
+//             strcpy(idf, getVerticeId(getGrafoVertice(getInfo(node))));
+//             menor2 = distancia(getPontoX(getGrafoVertice(getInfo(node))), getPontoY(getGrafoVertice(getInfo(node))),xf, yf);
+//         }
+//     }
+
+//     Lista mcPath = dijkstra(grafo, idi, idf, &mc, getArestaCmp);
+//     Lista mrPath = dijkstra(grafo, idi, idf, &mr, getArestaTempo);
+
+//     if(strcmp(sfx, "-") != 0)
+//     {
+        
+//     }
+// }

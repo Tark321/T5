@@ -53,3 +53,8 @@ char* getPessoaSexo(Pessoa pessoa)
     StructPessoa* p = (StructPessoa*) pessoa;
     return p->sexo;
 }
+
+int getPessoaSize()
+{
+    return sizeof(StructPessoa);
+}

@@ -88,6 +88,11 @@ double getAddressNum(Address address)
     return a->num;
 }
 
+int getAddressSize()
+{
+    return sizeof(StructAddress);
+}
+
 void setAddressCep(Address address, char cep[])
 {
     StructAddress* a = (StructAddress*) address;
@@ -112,10 +117,10 @@ void setAddressComplemento(Address address, char complemento[])
     strcpy(a->complemento, complemento);
 }
 
-void setAddressPonto(Address address, Ponto ponto)
+void setAddressPonto(Address address, double x, double y)
 {
     StructAddress* a = (StructAddress*) address;
-    a->ponto = ponto;
+    a->ponto = criaPonto(x, y);
 }
 
 void setAddressNum(Address address, double num)

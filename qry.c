@@ -306,7 +306,7 @@ void dq(QuadTree treeObjeto[], FILE* saida, char id[], double r, int ident, List
     Circulo c3 = criaCirculo("0", 7, x, y, "2", "yellow", "none", 1);
     insert(listasQry[3], c3);
 
-    Lista lista = nosDentroRetanguloQt(treeObjeto[3], x-r, y-r, x+r, y+r);
+    Lista lista = nosDentroRetanguloQt(treeObjeto[3], x-r, y-r, x+2*r, y+2*r);
     node = getFirst(lista);
 
     while(node != NULL)
@@ -315,20 +315,24 @@ void dq(QuadTree treeObjeto[], FILE* saida, char id[], double r, int ident, List
         p = getQuadraPonto(info);
         w = getQuadraW(info);
         h = getQuadraH(info);
+        
+        if(getQuadraY(info) != 0 && getQuadraX(info) != 0)
+        {
+            if(retInternoRet(getQuadraX(info), x-r, getQuadraY(info), y-r, w, 2*r, h, 2*r))
+            {//retInternoCirc(getPontoX(p), getPontoY(p), w, h, x, y, r))
+                
+                if(ident == 1)
+                {
+                    fprintf(svg, "\t<rect x=\"%lf\" y=\"%lf\" width=\"%lf\" height=\"%lf\" fill=\"beige\" stroke=\"olive\" stroke-width=\"%s\" rx=\"20\"/>\n", 
+                    getPontoX(p), getPontoY(p), w, h, getQuadraSw(info));
+                }
 
-        if(retInternoRet(getPontoX(p), x-r, getPontoY(p), y-r, w, 2*r, h, 2*r))
-        {//retInternoCirc(getPontoX(p), getPontoY(p), w, h, x, y, r))
-            if(ident == 1)
-            {
-                fprintf(svg, "\t<rect x=\"%lf\" y=\"%lf\" width=\"%lf\" height=\"%lf\" fill=\"beige\" stroke=\"olive\" stroke-width=\"%s\" rx=\"20\"/>\n", 
-                getPontoX(p), getPontoY(p), w, h, getQuadraSw(info));
+                fprintf(saida, "QUADRA %s EXCLUIDA COM SUCESSO\n", getQuadraCep(info));
+                aux = getInfo(node);
+                info = removeNoQt(treeObjeto[3], aux);
+                desalocaQuadraPonto(info);
+
             }
-
-            fprintf(saida, "QUADRA %s EXCLUIDA COM SUCESSO\n", getQuadraCep(info));
-            aux = getInfo(node);
-            info = removeNoQt(treeObjeto[3], aux);
-            desalocaQuadraPonto(info);
-
         }
 
         node = getNext(node);

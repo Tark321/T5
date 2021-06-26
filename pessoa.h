@@ -14,4 +14,7 @@ char* getPessoaSobre(Pessoa pessoa);
 char* getPessoaNasc(Pessoa pessoa);
 
 char* getPessoaSexo(Pessoa pessoa);
+
+int getPessoaSize();
+
 #endif
